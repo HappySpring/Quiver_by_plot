@@ -130,9 +130,9 @@ FUN_quiver_by_plotV2( x, y, u, v, vel_scale, ...)
 | -------------------- | ------------- | ------------------------------------------------------------ |
 | is_plot_head         | true          | show/hide head of arrows                                     |
 | is_plot_body         | true          | show/hide body of arrows                                     |
-| fill_head            | false         |                                                              |
+| fill_head            | false         | If this is true, a filled triangle will be used as the head of each arrow.<br/>In this case, patch, instead of plot, is used to plot arrow heads. |
 | color                | 'k'           | color of arrows                                              |
-| head_length          | 0             | length of arrow head<br />                                   |
+| head_length          | 0             | length of (the wing of) arrow head<br /><br />It shares the same unit with u and v. (Thus, the vel_scale will also be applied to head_length)<br/>        0  : it is set according to the gca (width & length in pixel).<br/>        >0  : it is the absolute length of the arrow head<br/>        -1~0: it is the percent of total vector length at each point. |
 | head_length_min      | 0             | minimal length of arrow head<br />                           |
 | head_angle           | 15            | Angle between arrow head and arrow body<br />`2*head_angle` is the angle between the two wings of arrow heads |
 | is_correct_angle     | false         | This is for vector time series and some special cases. <br /> |
