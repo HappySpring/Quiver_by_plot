@@ -21,7 +21,7 @@ v = -cosd( theta );
 %% Example 1.1 A simple case
 
 figure
-FUN_quiver_by_plotV2( x, y, u, v, 0 )
+FUN_quiver_by_plotV2( x, y, u, v, 0)
 
 title('Example 1.1');
 

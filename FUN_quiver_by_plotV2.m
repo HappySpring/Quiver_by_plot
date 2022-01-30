@@ -32,22 +32,34 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
 %                  If this is true, a filled triangle will be used as the head of each arrow.
 %                  In this case, patch, instead of plot, is used to plot arrow heads.
 %
-%       head_length: [default: 0] 
+%       head_length_pixel: [default: 0]
+%                   It shares the same unit with u and v. (Thus, the vel_scale 
+%                            will also be applied to head_length)
+%                    0  : it is set according to the gca (width & length in pixel).
+%                   >0  : it is the absolute length of the arrow head in unix of pixel
+%                   -1~0: it is the percent of total vector length at each point.
+%
+%       head_length_min_pixel: [default: 0]
+%                   minimal head length in unix of pixel
+%
+%       head_angle: 0.5* angles between the two wings of the arrow head (in degree)  [default: 10]
+%
+%       is_correct_angle [default: false]
+%   
+%       .... Remainings in varargin will be used as paramters for `plot` in general cases and `patch` for colorful arrows.
+%
+%
+%   Parameters not recommended anymore.
+%
+%       head_length: [default: 0] (This is same as head_length_pixel but follows the same unit of the x axis.)
 %                   It shares the same unit with u and v. (Thus, the vel_scale 
 %                            will also be applied to head_length)
 %                    0  : it is set according to the gca (width & length in pixel).
 %                   >0  : it is the absolute length of the arrow head
 %                   -1~0: it is the percent of total vector length at each point.
 %
-%       head_length_min: [default: 0]
-%                   minimal head length
-%
-%       head_angle: half of arrow head's open angle (in degree)  [default: 10]
-%                  half angle of the arrow head.
-%
-%       is_correct_angle [default: false]
-%   
-%   Remainings in varargin will be used as paramters for `plot`
+%       head_length_min: [default: 0] (This is same as head_length_min_pixel but follows the same unit of the x axis.)
+%                   minimal head length following the same unit of the x axis.
 %
 % (NOTE: The meaning of parameters plotarrows, head_length and head_angleh are different 
 %  from the ones in FUN_quiver_by_plot (or the V1) )
@@ -81,6 +93,7 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
 
 
 % =========================================================================
+% V3.01 by L. Chi: update comments. Some minor edits.
 % V3.00 by L. Chi: 
 %         - fix a bug in calculating head length defined by the parameter "head_length"
 %           when the ratio of pixels per distance between x and y distance
@@ -92,8 +105,7 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
 %         - add a warning if 'XLimMode' or "YLimMode' is set to 'auto'.
 %         - move "hold on" after the first time "plot" is called to make
 %         the behavior matches exception.
-%   
-%         
+%
 % V2.67 by L. Chi: Add is_arrow_origin_at_xy
 % V2.66 by L. Chi: update head length parameters
 %         - Update default behaiver. The default head length is
@@ -248,8 +260,7 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
         error('The input variable x/y/u/v should share same size')
     end
     
-    if is_colorful_arrows && isequal( size( zval ), plot_size )
-    else
+    if is_colorful_arrows && ~isequal( size( zval ), plot_size )
         error('The input variable x/y/u/v should share same size')
     end
     
@@ -615,6 +626,8 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
     end
 
     %h = [h1;h2];
+    h1 = h1(:);
+    h2 = h2(:);
 
     % keep the original xlimit
     % The angle is corrected based on fixed the xlimit and ylimit.
