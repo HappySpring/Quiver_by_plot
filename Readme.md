@@ -210,7 +210,7 @@ title('Example 1.2 "scale"');
 
 
 
-<img src="E:\working_dir_sync\2022-01-30_quiver_by_plot\Quiver_by_plot\doc\Demo_3.1_arrows\Example_1.2.jpg" alt="Example_1.2" style="zoom:50%;" />
+<img src="doc\Demo_3.1_arrows\Example_1.2.jpg" alt="Example_1.2" style="zoom:50%;" />
 
 ##### Demo - set head length in pixel (parameter: 'head_length_pixel'). 
 
@@ -258,7 +258,7 @@ box on
 title('Example 1.3: "head_length (negative)"','Interpreter','none');
 ```
 
-<img src="E:\working_dir_sync\2022-01-30_quiver_by_plot\Quiver_by_plot\doc\Demo_3.1_arrows\Example_1.3b.jpg" alt="Example_1.3b" style="zoom:50%;" />
+<img src="doc\Demo_3.1_arrows\Example_1.3b.jpg" alt="Example_1.3b" style="zoom:50%;" />
 
 ##### Demo - set head angle (parameter: 'head_angle'). 
 
@@ -282,7 +282,7 @@ box on
 title('Example 1.4: "head_angle"','Interpreter','none');
 ```
 
-<img src="E:\working_dir_sync\2022-01-30_quiver_by_plot\Quiver_by_plot\doc\Demo_3.1_arrows\Example_1.4.jpg" alt="Example_1.4" style="zoom:50%;" />
+<img src="doc\Demo_3.1_arrows\Example_1.4.jpg" alt="Example_1.4" style="zoom:50%;" />
 
 ##### Demo - hide arrow head (parameter: 'is_plot_head'). 
 
@@ -299,7 +299,7 @@ box on
 title('Example 1.5: "is_plot_head=false"','Interpreter','none');
 ```
 
-<img src="E:\working_dir_sync\2022-01-30_quiver_by_plot\Quiver_by_plot\doc\Demo_3.1_arrows\Example_1.5.jpg" alt="Example_1.5" style="zoom:50%;" />
+<img src="doc\Demo_3.1_arrows\Example_1.5.jpg" alt="Example_1.5" style="zoom:50%;" />
 
 ##### Demo - hide arrow body (parameter: 'is_plot_body'). 
 
@@ -317,7 +317,7 @@ box on
 title({'Example 1.6: "is_plot_body=false"','In this case, length of the arrow head must be','provided in parameter "head_length"'},'Interpreter','none');
 ```
 
-<img src="E:\working_dir_sync\2022-01-30_quiver_by_plot\Quiver_by_plot\doc\Demo_3.1_arrows\Example_1.6.jpg" alt="Example_1.6" style="zoom:50%;" />
+<img src="doc\Demo_3.1_arrows\Example_1.6.jpg" alt="Example_1.6" style="zoom:50%;" />
 
 ##### Demo - perfect arrow head 
 
@@ -340,7 +340,7 @@ box on
 title('Example 1.8: a "perfect" arrow','Interpreter','none');
 ```
 
-<img src="E:\working_dir_sync\2022-01-30_quiver_by_plot\Quiver_by_plot\doc\Demo_3.1_arrows\Example_1.8.jpg" alt="Example_1.8" style="zoom:50%;" />
+<img src="doc\Demo_3.1_arrows\Example_1.8.jpg" alt="Example_1.8" style="zoom:50%;" />
 
 
 
@@ -403,7 +403,7 @@ title({'Example 1: a simple case', 'Color is defined by the magnitude of arrows'
 
 ```
 
-<img src="E:\working_dir_sync\2022-01-30_quiver_by_plot\Quiver_by_plot\doc\Demo_3.2_colorful_arrows\Demo_2.1.jpg" alt="Demo_2.1" style="zoom:50%;" />
+<img src="doc\Demo_3.2_colorful_arrows\Demo_2.1.jpg" alt="Demo_2.1" style="zoom:50%;" />
 
 ##### Demo - the color is defined by a given matrix
 
@@ -443,7 +443,7 @@ colorbar
 title({'Example 2.2: Color is defined by parameter "zval"'});
 ```
 
-<img src="E:\working_dir_sync\2022-01-30_quiver_by_plot\Quiver_by_plot\doc\Demo_3.2_colorful_arrows\Example_2.2.jpg" alt="Example_2.2" style="zoom:50%;" />
+<img src="doc\Demo_3.2_colorful_arrows\Example_2.2.jpg" alt="Example_2.2" style="zoom:50%;" />
 
 ### 3.3 Work in mmap
 
@@ -484,7 +484,7 @@ colorbar
 title({'Example 1.7: Arrows on m_map'},'Interpreter','none');
 ```
 
-<img src="E:\working_dir_sync\2022-01-30_quiver_by_plot\Quiver_by_plot\doc\Demo_3.1_arrows\Example_1.7.jpg" alt="Example_1.7" style="zoom:50%;" />
+<img src="doc\Demo_3.1_arrows\Example_1.7.jpg" alt="Example_1.7" style="zoom:50%;" />
 
 
 
@@ -524,9 +524,9 @@ title({'Example 3.2: Colorful arrows on m_map'},'Interpreter','none');
 FUN_easy_export_fig('Example_3.2.jpg','-m2');
 ```
 
-<img src="E:\working_dir_sync\2022-01-30_quiver_by_plot\Quiver_by_plot\doc\Demo_3.3_mmap\Example_3.2.jpg" alt="Example_3.2" style="zoom:50%;" />
+<img src="doc\Demo_3.3_mmap\Example_3.2.jpg" alt="Example_3.2" style="zoom:50%;" />
 
 ## 4. Acknowledgements
 
-
+Matlab script `plotboxpos`, which is available from https://github.com/kakearney/plotboxpos-pkg, is adopted to calculate the accurate axis ratio. 
 
