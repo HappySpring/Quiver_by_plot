@@ -447,7 +447,11 @@ title({'Example 2.2: Color is defined by parameter "zval"'});
 
 ### 3.3 Work in mmap
 
-#### 3.3.1 Simple arrows (FUN_quiver_by_plotV2_mmap)
+#### 3.3.1 Simple arrows (`FUN_quiver_by_plotV2_mmap`)
+
+Inputs are identical to `FUN_quiver_by_plotV2`.
+
+It is recommended to call m_grid before `FUN_quiver_by_plotV2_mmap`
 
 ```matlab
 %% prepare data
@@ -479,19 +483,23 @@ m_grid;
 hd1 = FUN_quiver_by_plotV2_mmap( x, y, u, v, 0 );
 
 m_coast('color','b')
-colorbar
 
-title({'Example 1.7: Arrows on m_map'},'Interpreter','none');
+title({'Example 3.1: Arrows on m_map'},'Interpreter','none');
 ```
 
 <img src="doc\Demo_3.1_arrows\Example_1.7.jpg" alt="Example_1.7" style="zoom:50%;" />
 
 
 
-### 3.3.2 Colorful arrows
+### 3.3.2 Colorful arrows (`FUN_quiver_by_plotV2_cmap_patch_mmap`)
+
+Inputs are identical to `FUN_quiver_by_plotV2_cmap_patch`.
+
+It is recommended to call m_grid before `FUN_quiver_by_plotV2_mmap`
 
 ```matlab
 %% prepare data
+
 x = -1:0.2:1;
 y = -1:0.2:1;
 
@@ -509,19 +517,18 @@ v = -cosd( theta ) .* r / 100;
 x = x*10 - 75;
 y = y*10 + 35;
 
-%%
+%% plot
 figure
 hold on
 
 m_proj('lambert', 'lon', [-88 -62], 'lat', [22 48] );
-FUN_quiver_by_plotV2_cmap_patch_mmap( x, y, u, v, 0 );
 m_grid
+
+FUN_quiver_by_plotV2_cmap_patch_mmap( x, y, u, v, 0 );
 m_coast('color','b')
 colorbar
 
 title({'Example 3.2: Colorful arrows on m_map'},'Interpreter','none');
-
-FUN_easy_export_fig('Example_3.2.jpg','-m2');
 ```
 
 <img src="doc\Demo_3.3_mmap\Example_3.2.jpg" alt="Example_3.2" style="zoom:50%;" />
