@@ -487,7 +487,7 @@ m_coast('color','b')
 title({'Example 3.1: Arrows on m_map'},'Interpreter','none');
 ```
 
-<img src="doc\Demo_3.1_arrows\Example_1.7.jpg" alt="Example_1.7" style="zoom:50%;" />
+<img src="doc/Demo_3.3_mmap/Example_3.1.jpg" alt="Example_3.1" style="zoom:50%;" />
 
 
 
