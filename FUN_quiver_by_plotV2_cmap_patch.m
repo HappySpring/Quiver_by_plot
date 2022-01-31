@@ -78,6 +78,7 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2_cmap_patch( x, y, u, v, 
 
 
 % =========================================================================
+% V3.01 by L. Chi: fix a bug in calling "FUN_quiver_by_plotV2";
 % V3.00 by L. Chi
 %         + This function has been integrated with FUN_quiver_by_plotV2. 
 %
@@ -150,6 +151,6 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2_cmap_patch( x, y, u, v, 
 % # call FUN_quiver_by_plotV2
 % =========================================================================
 
-    [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 'zval', zval, varargin );
+    [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 'zval', zval, varargin{:} );
 
 

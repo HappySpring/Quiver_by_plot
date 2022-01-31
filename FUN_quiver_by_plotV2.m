@@ -302,6 +302,28 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
         end
         
         if all( size(x) == 1 )
+            tem = get(gcf,'children');
+            
+            if isempty(tem)
+                xlimit = [0, 1];
+                ylimit = [0, 1];
+            else
+                xlimit = get(gca,'xlim');
+                ylimit = get(gca,'ylim');
+            end
+
+            if xlimit(1) == xlimit(2)
+                xlimit = [xlimit(1) xlimit(1)];
+            end
+            
+            if ylimit(1) == ylimit(2)
+                ylimit = [ylimit(1) ylimit(1)];
+            end
+            
+            xlim_diff = xlimit(2) - xlimit(1);
+            ylim_diff = ylimit(2) - ylimit(1);
+   
+       
             delx = xlim_diff/3;
             dely = ylim_diff/3;
         else
@@ -309,6 +331,11 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
             dely = diff([min(y(:)) max(y(:))])/m;
         end
         del = delx.^2 + dely.^2;
+        
+        % the variables cleared in the next line are only used for auto size and my be modifed
+        % later.
+        clear delx dely xlim_diff ylim_diff xlimit ylimit
+         
         if del>0
             len = sqrt((u.^2 + v.^2)/del);
             len2 = median(len(:));
