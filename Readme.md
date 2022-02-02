@@ -2,8 +2,6 @@
 
 ## 1. Introduction
 
-To be finished.
-
 ### 1.1 Features/Why I wrote this
 
 + More flexibility than the built-in function `quiver`.
@@ -445,7 +443,7 @@ title({'Example 2.2: Color is defined by parameter "zval"'});
 
 <img src="doc\Demo_3.2_colorful_arrows\Example_2.2.jpg" alt="Example_2.2" style="zoom:50%;" />
 
-### 3.3 Work in mmap
+### 3.3 Work with mmap
 
 #### 3.3.1 Simple arrows (`FUN_quiver_by_plotV2_mmap`)
 
@@ -533,7 +531,45 @@ title({'Example 3.2: Colorful arrows on m_map'},'Interpreter','none');
 
 <img src="doc\Demo_3.3_mmap\Example_3.2.jpg" alt="Example_3.2" style="zoom:50%;" />
 
-## 4. Acknowledgements
+## 4. Vector Time Series
+
+To plot vector time series, plot set `is_correct_angle` to `true`.
+
+```matlab
+%% prepare data
+
+x = 0:5:270;
+u = cosd(x);
+v = sind(x);
+
+%% Example 1.1 A simple case
+
+figure('position',[  100 100  980  300])
+hold on
+
+% please always set xlim and ylim first
+xlim([min(x) max(x)]);
+ylim([-1.2 1.2])
+vel_plot_scale = 1; % arrow sacle
+
+% plot arrows
+% 'is_correct_angle' is set to true to plot arrows according to its real
+%   direction, ignorning the ratio between x & y axis. 
+FUN_quiver_by_plotV2( x, zeros(size(x)), u, v, vel_plot_scale, 'is_correct_angle', true, 'is_plot_head', false);
+box on
+
+plot( x, zeros(size(x)), '-b');
+
+title('Example: Vector time series');	
+```
+
+<img src="doc/Demo_3.1b_vector_time_series/Example_1.1.jpg" alt="Example_1.1" style="zoom:50%;" />
+
+
+
+
+
+## 5. Acknowledgements
 
 Matlab script `plotboxpos`, which is available from https://github.com/kakearney/plotboxpos-pkg, is adopted to calculate the accurate axis ratio. 
 
