@@ -531,7 +531,7 @@ title({'Example 3.2: Colorful arrows on m_map'},'Interpreter','none');
 
 <img src="doc\Demo_3.3_mmap\Example_3.2.jpg" alt="Example_3.2" style="zoom:50%;" />
 
-## 4. Vector Time Series
+### 3.4. Vector Time Series
 
 To plot vector time series, plot set `is_correct_angle` to `true`.
 
@@ -565,11 +565,7 @@ title('Example: Vector time series');
 
 <img src="doc/Demo_3.1b_vector_time_series/Example_1.1.jpg" alt="Example_1.1" style="zoom:50%;" />
 
-
-
-
-
-## 5. Acknowledgements
+## 4. Acknowledgements
 
 Matlab script `plotboxpos`, which is available from https://github.com/kakearney/plotboxpos-pkg, is adopted to calculate the accurate axis ratio. 
 
