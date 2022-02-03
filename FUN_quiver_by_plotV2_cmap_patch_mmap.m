@@ -1,4 +1,4 @@
-function h=FUN_quiver_by_plotV2_mmap(long,lat,u,v,vel_scale,varargin)
+function h=FUN_quiver_by_plotV2_cmap_patch_mmap(long,lat,u,v,vel_scale,varargin)
 % This is an edited version of m_quiver.
 % It is modified to be comptible with FUN_quiver_by_plotV2
 % V1.00 07/09/2021: first version
