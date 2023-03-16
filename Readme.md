@@ -109,10 +109,12 @@ Click "Home tab> Set Path". It will open a dialog for setting the path. Then, cl
 | head_angle                 | 15            | Angle between arrow head and arrow body<br />`2*head_angle` is the angle between the two wings of the arrow head. |
 | is_correct_angle           | false         | This is for vector time series and some special cases.       |
 | is_correct_angle_by_edit_v | false         |                                                              |
+| head_style                 | 1             | Head style. See                                              |
 | interval                   | 1             | interval                                                     |
 | interval_x                 | interval      | interval for the first dim (usually x)                       |
 | interval_y                 | interval      | interval for the second dim (usually y)                      |
 | is_plot_via_arrayfun       | false         | Call `plot` via  `arrayfun`. This is useful if you want to change properties of a subsample of arrows.<br />**false**: The returned handles h1 & h2 are 1 x 1 matrix (one for array body and one for arrow head)<br />**true**: The returned handles h1 & h2 are  [m x 1] matrix (one for array body and one for arrow head)<br />Note: this does not support colorful plots yet. |
+| gca_pos_now                | []            | By default, `FUN_quiver_by_plotV2` will get it by calling `plotboxpos`. However, this costs a lot of time in repeating hundreds of plots with the same configuration. Providing this as an input variable could save some time. |
 | .... [varargin]            | ....          | Other parameters (e.g., 'linewidth') applicable to `plot` for regular plots or `patch` for colorful arrows. |
 
 ##### Parameters not recommended
@@ -564,6 +566,24 @@ title('Example: Vector time series');
 ```
 
 <img src="doc/Demo_3.1b_vector_time_series/Example_1.1.jpg" alt="Example_1.1" style="zoom:50%;" />
+
+
+
+## 3.5 Arrow style
+
+* default style (`head_style=1`)
+
+* The head_style=2 can be further tuned by setting parameter `head_length_2`
+
+  
+
+  <img src="doc/Demo_3.5_arrow/Example_3.4.jpg" alt="Example_3.4" style="zoom:67%;" />
+
+  
+
+
+
+
 
 ## 4. Acknowledgements
 

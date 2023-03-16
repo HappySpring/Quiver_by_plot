@@ -178,6 +178,8 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
     [head_length_pixel,varargin]      = FUN_codetools_read_from_varargin( varargin, 'head_length_pixel', 0 );
     [head_length_pixel_min, varargin] = FUN_codetools_read_from_varargin( varargin, 'head_length_pixel_min', 0 );
     % style 
+    % style - 1 (default): a simple arrow
+    % style - 2: see readme.md section 3.5 Arrow style
     [head_style, varargin]            = FUN_codetools_read_from_varargin( varargin, 'head_style',      1  );
     [head_length_2, varargin]         = FUN_codetools_read_from_varargin( varargin, 'head_length_2',   0.5);
     
@@ -589,34 +591,32 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
 
         % ### Generate arrays for arrow heads -----------------------------
         if head_style == 1 % default, simple arrow like ->
+            
+            npa = 3; % number of point for each arrow.
+            
             if is_plot_body
                 % head is placed at the end of the arrow
                 hu = [x+up-head_length_pixel./pix_per_x.*cosd( tem_ang1+head_angle );  x+up; ...
-                      x+up-head_length_pixel./pix_per_x.*cosd( tem_ang1-head_angle );  NaN(size(x)); NaN(size(x))];
+                      x+up-head_length_pixel./pix_per_x.*cosd( tem_ang1-head_angle );  NaN(size(x))];
 
                 hv = [y+vp-head_length_pixel./pix_per_y.*sind( tem_ang1+head_angle );  y+vp; ...
-                      y+vp-head_length_pixel./pix_per_y.*sind( tem_ang1-head_angle );  NaN(size(x)); NaN(size(x))];
+                      y+vp-head_length_pixel./pix_per_y.*sind( tem_ang1-head_angle );  NaN(size(x))];
             else
                 % the middle point of the head triangle is placed at (x,y)
                 %
                 % up, vp are kept in calculating tem_hu, tem_hv to keep a correct size.
                 tem_hu = [up-head_length_pixel./pix_per_x.*cosd( tem_ang1+head_angle );  up; ...
-                          up-head_length_pixel./pix_per_x.*cosd( tem_ang1-head_angle );  NaN(size(x)); NaN(size(x))];
+                          up-head_length_pixel./pix_per_x.*cosd( tem_ang1-head_angle );  NaN(size(x))];
 
                 tem_hv = [vp-head_length_pixel./pix_per_y.*sind( tem_ang1+head_angle );  vp; ...
-                          vp-head_length_pixel./pix_per_y.*sind( tem_ang1-head_angle );  NaN(size(x)); NaN(size(x))];
+                          vp-head_length_pixel./pix_per_y.*sind( tem_ang1-head_angle );  NaN(size(x))];
 
                 hu = x + tem_hu - nanmean(tem_hu(1:3,:));
                 hv = y + tem_hv - nanmean(tem_hv(1:3,:));
             end
-            
-            % hu(4,:) & hu(5,:) are NaNs. Let hu(4,:) = hu(1,:) to make
-            % hu/hv share same size as their values with head_style 2. This
-            % would simplify the codes for adding them to a map. 
-            hu(4,:) = hu(3,:);
-            hv(4,:) = hv(3,:);
-            
+
         elseif head_style == 2
+            npa = 5; % number of point for each arrow.
             
             if is_plot_body
                 % head is placed at the end of the arrow
@@ -624,14 +624,14 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
                       x+up; ...
                       x+up-head_length_pixel./pix_per_x.*cosd( tem_ang1-head_angle );   ...
                       x+up-head_length_pixel./pix_per_x.*cosd( tem_ang1 )*head_length_2;...
-                      %x+up-head_length_pixel./pix_per_x.*cosd( tem_ang1+head_angle );  ...
+                      x+up-head_length_pixel./pix_per_x.*cosd( tem_ang1+head_angle );  ...
                       NaN(size(x))];
 
                 hv = [y+vp-head_length_pixel./pix_per_y.*sind( tem_ang1+head_angle );        % p1
                       y+vp; ...                                                              % p2
                       y+vp-head_length_pixel./pix_per_y.*sind( tem_ang1-head_angle ); ...    % p3
                       y+vp-head_length_pixel./pix_per_y.*sind( tem_ang1 )*head_length_2; ... % p4
-                      %y+vp-head_length_pixel./pix_per_y.*sind( tem_ang1+head_angle );  ...   % p1
+                      y+vp-head_length_pixel./pix_per_y.*sind( tem_ang1+head_angle );  ...   % p1
                       NaN(size(x))];
             else
                 % the middle point of the head triangle is placed at (x,y)
@@ -641,14 +641,14 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
                           up; ...
                           up-head_length_pixel./pix_per_x.*cosd( tem_ang1-head_angle ); ... 
                           up-head_length_pixel./pix_per_x.*cosd( tem_ang1 )*head_length_2; ... 
-                          %up-head_length_pixel./pix_per_x.*cosd( tem_ang1+head_angle );  ...
+                          up-head_length_pixel./pix_per_x.*cosd( tem_ang1+head_angle );  ...
                           NaN(size(x))];
 
                 tem_hv = [vp-head_length_pixel./pix_per_y.*sind( tem_ang1+head_angle );  
                           vp; ...
                           vp-head_length_pixel./pix_per_y.*sind( tem_ang1-head_angle );  ...
                           vp-head_length_pixel./pix_per_y.*sind( tem_ang1 )*head_length_2;  ...
-                          %vp-head_length_pixel./pix_per_y.*sind( tem_ang1+head_angle );...
+                          vp-head_length_pixel./pix_per_y.*sind( tem_ang1+head_angle );...
                           NaN(size(x))];
 
                 hu = x + tem_hu - nanmean(tem_hu(1:3,:)); % tem_hu(4,:) is added for tuning arrow style. It should not be counted here.
@@ -681,7 +681,7 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
         if is_colorful_arrows
             
             if fill_head
-                h2  = patch( 'XData', hu(1:4,:), 'YData', hv(1:4,:), 'CData', repmat(zval(:).',4,1), 'FaceColor','flat', 'edgecolor','none', varargin{:} );
+                h2  = patch( 'XData', hu(1:npa,:), 'YData', hv(1:npa,:), 'CData', repmat(zval(:).',npa,1), 'FaceColor','flat', 'edgecolor','none', varargin{:} );
             else
                 h21 = patch( 'XData', hu(1:2,:), 'YData', hv(1:2,:), 'CData', repmat(zval(:).',2,1), 'FaceColor','none', 'edgecolor','flat', varargin{:} );
                 h22 = patch( 'XData', hu(2:3,:), 'YData', hv(2:3,:), 'CData', repmat(zval(:).',2,1), 'FaceColor','none', 'edgecolor','flat', varargin{:} );
@@ -700,19 +700,32 @@ function [h1,h2, uu, vv, hu, hv] = FUN_quiver_by_plotV2( x, y, u, v, vel_scale, 
         
             if is_plot_via_arrayfun
             % h1 is a 1 x N matrix
-
-                if fill_head
-                    h2 = arrayfun( @(x01,x02,x03,x04,y01,y02,y03,y04)patch([x01;x02;x03;x04],[y01;y02;y03;y04], line_color, 'parent', cax, 'edgecolor','none', varargin{:}), hu(1,:), hu(2,:), hu(3,:), hu(4,:), hv(1,:), hv(2,:), hv(3,:), hv(4,:), 'UniformOutput',false);
-                    h2 = cat(1, h2{:});
-                else    
-                    %h2 = arrayfun( @(x01,x02,x03,y01,y02,y03)plot([x01,x02,x03],[y01,y02,y03],'-','parent',cax, 'color', line_color, varargin{:}), hu(1,:), hu(2,:), hu(3,:), hv(1,:), hv(2,:), hv(3,:) );
-                    h2 = arrayfun( @(x01,x02,x03,x04,y01,y02,y03,y04)plot([x01,x02,x03,x04],[y01,y02,y03,y04],'-','parent',cax, 'color', line_color, varargin{:}), hu(1,:), hu(2,:), hu(3,:), hu(4,:), hv(1,:), hv(2,:), hv(3,:),hv(4,:), 'UniformOutput',false);
-                    h2 = cat(1, h2{:});
+                if head_style == 1
+                    if fill_head
+                        h2 = arrayfun( @(x01,x02,x03,y01,y02,y03)patch([x01;x02;x03],[y01;y02;y03], line_color, 'parent', cax, 'edgecolor','none', varargin{:}), hu(1,:), hu(2,:), hu(3,:), hv(1,:), hv(2,:), hv(3,:), 'UniformOutput',false);
+                        h2 = cat(1, h2{:});
+                    else    
+                        %h2 = arrayfun( @(x01,x02,x03,y01,y02,y03)plot([x01,x02,x03],[y01,y02,y03],'-','parent',cax, 'color', line_color, varargin{:}), hu(1,:), hu(2,:), hu(3,:), hv(1,:), hv(2,:), hv(3,:) );
+                        h2 = arrayfun( @(x01,x02,x03,y01,y02,y03)plot([x01,x02,x03],[y01,y02,y03],'-','parent',cax, 'color', line_color, varargin{:}), hu(1,:), hu(2,:), hu(3,:), hv(1,:), hv(2,:), hv(3,:), 'UniformOutput',false);
+                        h2 = cat(1, h2{:});
+                    end
+                elseif head_style == 2
+                    if fill_head
+                        h2 = arrayfun( @(x01,x02,x03,x04,x05,y01,y02,y03,y04,y05)patch([x01;x02;x03;x04;x05],[y01;y02;y03;y04;y05], line_color, 'parent', cax, 'edgecolor','none', varargin{:}), hu(1,:), hu(2,:), hu(3,:), hu(4,:), hu(5,:), hv(1,:), hv(2,:), hv(3,:), hv(4,:), hv(5,:), 'UniformOutput',false);
+                        h2 = cat(1, h2{:});
+                    else    
+                        %h2 = arrayfun( @(x01,x02,x03,y01,y02,y03)plot([x01,x02,x03],[y01,y02,y03],'-','parent',cax, 'color', line_color, varargin{:}), hu(1,:), hu(2,:), hu(3,:), hv(1,:), hv(2,:), hv(3,:) );
+                        h2 = arrayfun( @(x01,x02,x03,x04,x05,y01,y02,y03,y04,y05)plot([x01,x02,x03,x04,x05],[y01,y02,y03,y04,y05],'-','parent',cax, 'color', line_color, varargin{:}), hu(1,:), hu(2,:), hu(3,:), hu(4,:), hu(5,:), hv(1,:), hv(2,:), hv(3,:),hv(4,:), hv(5,:),'UniformOutput',false);
+                        h2 = cat(1, h2{:});
+                    end
+                else
+                    error('unknown head_style!');
                 end
             else
             % h1 is in size of 1 x 1
                 if fill_head
-                    h2 = patch(hu(1:4,:),hv(1:4,:), line_color, 'parent', cax, 'edgecolor','none', varargin{:});
+                    
+                    h2 = patch(hu(1:npa,:),hv(1:npa,:), line_color, 'parent', cax, 'edgecolor','none', varargin{:});
                 else
                     h2 = plot(hu(:),hv(:),'-','parent',cax, 'color', line_color, varargin{:});
                 end
